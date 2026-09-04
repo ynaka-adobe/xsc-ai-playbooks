@@ -82,6 +82,10 @@ content into a new demo — instead of manual browser steps.
 
 Optional but recommended — without it, content seeding falls back to the browser (`da.live`).
 
+> **If the DA MCP is failing** (tools erroring, "server disconnected", or `da_*` calls hang): **disconnect the AEM
+> DA connector and reconnect it** — via your claude.ai connector settings, or `/mcp` in an interactive terminal —
+> then retry. A stale/expired connection is the usual cause.
+
 ---
 
 ## 4. Readiness check
