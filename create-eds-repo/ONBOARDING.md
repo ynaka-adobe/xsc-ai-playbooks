@@ -158,8 +158,8 @@ credential **and** a per-org permission grant (handled by **sync-da-content.md**
 1. **Grant your org `write`** — in your org's `da.live/config` → **`permissions`** sheet, add four rows (both IMS
    orgs, `write` on `CONFIG` and `/ + **`). Exact rows + screenshot in **sync-da-content.md**. Skip if already
    granted — org-level grants cover every site in the org.
-2. **Run the config sync** — trigger `sync-config` (the server-side action reads da-demo-kit's config with its
-   stored `DA_Token` and PUTs it to your site).
+2. **Run the config sync** — trigger `sync-config` (the server-side action mints an IMS token from its stored S2S
+   credential, reads da-demo-kit's config with it, and PUTs it to your site).
 
 Verify at `https://da.live/config#/<owner>/<site>/` — the **data / library / apps / prepare** tabs should be present.
 
