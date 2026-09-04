@@ -114,11 +114,46 @@ your content repository, EDS site, and admin user.
 
 ---
 
-## Phase 4 — Seed default content (from da-demo-kit)
+## Phase 4 — Sync config (from da-demo-kit)
 
-Every new demo's content repo starts **empty**, so the preview is blank until seeded. Seed it with da-demo-kit's
-sample content (homepage, nav, footer) so the demo renders immediately — Path A then migrates real content over it;
-Path B builds integrations on it.
+**Do this before seeding content.** The site needs its **config store** (data, library, apps, prepare) in place
+*first*, so that when content is seeded (Phase 5) it renders with the right blocks, templates, and tool/integration
+wiring. An empty config = seeded content that doesn't render correctly.
+
+Config is a **`PUT` to `admin.da.live/config`** (not a content write), so — unlike content — it needs a DA
+credential **and** a per-org permission grant (handled by **sync-da-content.md** / the `sync-config` action):
+
+1. **Grant your org `write`** — in your org's `da.live/config` → **`permissions`** sheet, add four rows (both IMS
+   orgs, `write` on `CONFIG` and `/ + **`). Exact rows + screenshot in **sync-da-content.md**. Skip if already
+   granted — org-level grants cover every site in the org.
+2. **Run the config sync — Claude calls the action itself** (via terminal/`curl` or a fetch tool; do **not** hand
+   the user a URL to click). In claude.ai chat without those tools, the user runs it and reports back:
+   ```bash
+   curl -s "https://332794-dademokitappbuilder.adobeioruntime.net/api/v1/web/da-demo-kit/sync-config?targetOrg=<owner>&targetRepo=<site>"
+   ```
+   The server-side action mints an IMS token from its stored S2S credential, reads da-demo-kit's config, and PUTs it
+   to the site. Confirm `{"success":true}`.
+3. **Sync the credential sheets — also Claude-invoked.** `sync-config` copies the config store but **not** the
+   `.da/*` credential sheets, so sync both separately:
+   ```bash
+   curl -s "https://332794-dademokitappbuilder.adobeioruntime.net/api/v1/web/da-demo-kit/sync-da-sheet?targetOrg=<owner>&targetRepo=<site>&sheetPath=.da/adobe-target.json"
+   curl -s "https://332794-dademokitappbuilder.adobeioruntime.net/api/v1/web/da-demo-kit/sync-da-sheet?targetOrg=<owner>&targetRepo=<site>&sheetPath=.da/adobe-workfront.json"
+   ```
+   **Never** sync `.da/adobe-da.json` — that's da-demo-kit's private `DA_Token` and must not be copied to a target.
+
+Verify at `https://da.live/config#/<owner>/<site>/` — the **data / library / apps / prepare** tabs should be present,
+and `<owner>/<site>`'s `.da/` folder should contain `adobe-target.json` and `adobe-workfront.json`.
+
+> **Why config needs setup that content doesn't:** content writes go through your own DA connector (no key); **config
+> needs the permission grant + credential**. A **403** on the config write = the permissions grant is missing.
+
+---
+
+## Phase 5 — Seed default content (from da-demo-kit)
+
+With config in place, seed the content. Every new demo's content repo starts **empty**, so the preview is blank
+until seeded. Seed it with da-demo-kit's sample content (homepage, nav, footer) so the demo renders immediately —
+Path A then migrates real content over it; Path B builds integrations on it.
 
 **Content gate** — first check whether content already exists (list the DA sources for the new site, or fetch the
 preview URL for HTTP 200). If it already has content, skip this phase.
@@ -146,31 +181,9 @@ returns HTTP 200 with the homepage. Two ways to publish:
 
 ---
 
-## Phase 5 — Sync config (from da-demo-kit)
-
-Content is only half the setup — the site also needs the **config store** (data, library, apps, prepare) so blocks,
-tools, and the Target/Workfront integrations are wired up. Do this **after content and before the fork**, so both
-paths start fully configured.
-
-Config is a **`PUT` to `admin.da.live/config`** (not a content write), so — unlike content — it needs a DA
-credential **and** a per-org permission grant (handled by **sync-da-content.md** / the `sync-config` action):
-
-1. **Grant your org `write`** — in your org's `da.live/config` → **`permissions`** sheet, add four rows (both IMS
-   orgs, `write` on `CONFIG` and `/ + **`). Exact rows + screenshot in **sync-da-content.md**. Skip if already
-   granted — org-level grants cover every site in the org.
-2. **Run the config sync** — trigger `sync-config` (the server-side action mints an IMS token from its stored S2S
-   credential, reads da-demo-kit's config with it, and PUTs it to your site).
-
-Verify at `https://da.live/config#/<owner>/<site>/` — the **data / library / apps / prepare** tabs should be present.
-
-> **Why content can succeed while config fails:** content writes go through your own DA connector (no key); **config
-> needs the permission grant + credential**. A **403** on the config write = the permissions grant is missing.
-
----
-
 ## Phase 6 — Fork: state your intention
 
-The base is done and the site has default content **and** config. Ask the user which path they want, and hand off:
+The base is done and the site has config **and** default content. Ask the user which path they want, and hand off:
 
 ### Path A — Modernize a real site with the Experience Modernization Agent
 > You want to migrate an existing website's pages, design, and content into this repo.
@@ -178,7 +191,7 @@ The base is done and the site has default content **and** config. Ask the user w
 ➡️ **Continue in `modernize-with-aemcoder.md`.** This base playbook ends here.
 
 ### Path B — Build tool integrations
-> You want to build integrations (Target, Workfront, etc.) on the default content seeded in Phase 4.
+> You want to build integrations (Target, Workfront, etc.) on the default content seeded in Phase 5.
 
 ➡️ **Continue in an integration playbook** (e.g. **add-target.md**). When the integration works, finish with
 **merge-back-to-base-template.md** to fold it into your base template.
