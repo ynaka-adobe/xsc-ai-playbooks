@@ -146,9 +146,31 @@ returns HTTP 200 with the homepage. Two ways to publish:
 
 ---
 
-## Phase 5 — Fork: state your intention
+## Phase 5 — Sync config (from da-demo-kit)
 
-The base is done and the demo has default content. Ask the user which path they want, and hand off:
+Content is only half the setup — the site also needs the **config store** (data, library, apps, prepare) so blocks,
+tools, and the Target/Workfront integrations are wired up. Do this **after content and before the fork**, so both
+paths start fully configured.
+
+Config is a **`PUT` to `admin.da.live/config`** (not a content write), so — unlike content — it needs a DA
+credential **and** a per-org permission grant (handled by **sync-da-content.md** / the `sync-config` action):
+
+1. **Grant your org `write`** — in your org's `da.live/config` → **`permissions`** sheet, add four rows (both IMS
+   orgs, `write` on `CONFIG` and `/ + **`). Exact rows + screenshot in **sync-da-content.md**. Skip if already
+   granted — org-level grants cover every site in the org.
+2. **Run the config sync** — trigger `sync-config` (the server-side action reads da-demo-kit's config with its
+   stored `DA_Token` and PUTs it to your site).
+
+Verify at `https://da.live/config#/<owner>/<site>/` — the **data / library / apps / prepare** tabs should be present.
+
+> **Why content can succeed while config fails:** content writes go through your own DA connector (no key); **config
+> needs the permission grant + credential**. A **403** on the config write = the permissions grant is missing.
+
+---
+
+## Phase 6 — Fork: state your intention
+
+The base is done and the site has default content **and** config. Ask the user which path they want, and hand off:
 
 ### Path A — Modernize a real site with the Experience Modernization Agent
 > You want to migrate an existing website's pages, design, and content into this repo.
