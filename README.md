@@ -1,19 +1,22 @@
 # XSC AI Playbooks
 
 Paste-into-Claude guides that help XSC teammates get more done with AI. Each playbook is a self-contained
-`ONBOARDING.md` — copy the file (or open its link), paste it into **Claude Code or claude.ai chat**, and Claude
+`<topic>.md` file — copy it (or open its link), paste it into **Claude Code or claude.ai chat**, and Claude
 walks you through the task step by step. **No coding experience required.**
+
+> **These files are generated** from the `aem-demo-playbooks` plugin skills (the single source of truth) by
+> `scripts/gen-onboarding.mjs` in that repo. **Don't hand-edit them here** — edit the matching skill and regenerate.
 
 ## Playbooks
 
 | # | Playbook | What it does | Open in Claude |
 |---|---|---|---|
-| 1 | **Readiness** (`readiness/`) | One-time setup: installs the tools (git, Node, AEM CLI) and creates your GitHub account. Do this once. | https://claude.ai/claude-code/onboard/qO5HVlt1cLoM |
-| 2 | **Create Your Own Repo Template** (`create-repo-template/`) | Copy a starter (e.g. da-demo-kit) into your own GitHub account as a reusable **template repo** — the base every demo starts from. Do this once. | https://claude.ai/claude-code/onboard/BlE55Ox0IDTX |
-| 3 | **Create Your EDS Repo — Base** (`create-eds-repo/`) | Repo from template → install AEM Code Sync → complete the bot setup wizard (creates the content repo, EDS site, admin). **Ends at a fork** → Path A or Path B. Run once per demo. | https://claude.ai/claude-code/onboard/AOeIi7qtej8k |
-| 4 | **Modernize with aemcoder — Path A** (`modernize-with-aemcoder/`) | Migrate a real site's pages, design & content with the Experience Modernization Agent (aemcoder.adobe.io) — migrate → design → polish → publish. | https://claude.ai/claude-code/onboard/MAGwJBquc7YJ |
-| 5 | **Add Adobe Target — Path B example** (`add-target/`) | An **integration type**: enable at.js, author a Target offer, verify an XT activity. Ends with a **MANIFEST** so it's portable. Uses a shared demo runtime (no credentials). | https://claude.ai/claude-code/onboard/CqpTPeWfx1YY |
-| 6 | **Merge Back to Base Template** (`merge-back-to-base-template/`) | The **final step**: use an integration's MANIFEST to fold the feature into your base template so every future demo inherits it. | https://claude.ai/claude-code/onboard/VhOxqKYzdbe_ |
+| 1 | **Readiness** (`readiness.md`) | One-time setup: installs the tools (git, Node, AEM CLI) and creates your GitHub account. Do this once. | https://claude.ai/claude-code/onboard/qO5HVlt1cLoM |
+| 2 | **Create Your Own Repo Template** (`create-repo-template.md`) | Copy a starter (e.g. da-demo-kit) into your own GitHub account as a reusable **template repo** — the base every demo starts from. Do this once. | https://claude.ai/claude-code/onboard/BlE55Ox0IDTX |
+| 3 | **Create Your EDS Repo — Base** (`create-eds-repo.md`) | Repo from template → install AEM Code Sync → complete the bot setup wizard (creates the content repo, EDS site, admin). **Ends at a fork** → Path A or Path B. Run once per demo. | https://claude.ai/claude-code/onboard/AOeIi7qtej8k |
+| 4 | **Modernize with aemcoder — Path A** (`modernize-with-aemcoder.md`) | Migrate a real site's pages, design & content with the Experience Modernization Agent (aemcoder.adobe.io) — migrate → design → polish → publish. | https://claude.ai/claude-code/onboard/MAGwJBquc7YJ |
+| 5 | **Add Adobe Target — Path B example** (`add-target.md`) | An **integration type**: enable at.js, author a Target offer, verify an XT activity. Ends with a **MANIFEST** so it's portable. Uses a shared demo runtime (no credentials). | https://claude.ai/claude-code/onboard/CqpTPeWfx1YY |
+| 6 | **Merge Back to Base Template** (`merge-back-to-base-template.md`) | The **final step**: use an integration's MANIFEST to fold the feature into your base template so every future demo inherits it. | https://claude.ai/claude-code/onboard/VhOxqKYzdbe_ |
 
 ## The two forks
 
@@ -35,7 +38,7 @@ built from the base template already includes it.
 3. **Each new demo:** run **Create Your EDS Repo** (3), then follow the fork — **Modernize with aemcoder** (4) or an
    integration playbook like **Add Adobe Target** (5).
 4. **Built something reusable?** Finish with **Merge Back to Base Template** (6).
-5. Open the link (or copy the playbook's `ONBOARDING.md`), paste it into Claude, and tell Claude to walk you through
+5. Open the link (or copy the playbook's `<topic>.md`), paste it into Claude, and tell Claude to walk you through
    it. It hands you exact prompts, confirms each step, and pauses for you along the way.
 
 ## Claude Code vs. claude.ai chat
@@ -57,30 +60,34 @@ browser either way.
 **Requirements (both surfaces):** a web browser, access to **aemcoder.adobe.io** (for Path A), and a GitHub account
 (no special org or `-adobe` naming needed). (git / Node / the AEM CLI are only needed for local editing.)
 
-## Folder layout
+## Layout
 
 ```
 xsc-ai-playbooks/
-├── README.md                             ← you are here
-├── readiness/ONBOARDING.md               ← 1: get set up
-├── create-repo-template/ONBOARDING.md    ← 2: create your base template
-├── create-eds-repo/ONBOARDING.md         ← 3: base repo → fork (A or B)
-├── modernize-with-aemcoder/ONBOARDING.md ← 4: Path A — migrate a real site
-├── add-target/ONBOARDING.md              ← 5: Path B example — integration + MANIFEST
-└── merge-back-to-base-template/ONBOARDING.md ← 6: merge a feature into your base template
+├── README.md                        ← you are here
+├── readiness.md                     ← 1: get set up
+├── create-repo-template.md          ← 2: create your base template
+├── create-eds-repo.md               ← 3: base repo → fork (A or B)
+├── modernize-with-aemcoder.md       ← 4: Path A — migrate a real site
+├── add-target.md                    ← 5: Path B example — integration + MANIFEST
+├── merge-back-to-base-template.md   ← 6: merge a feature into your base template
+├── sync-da-content.md               ← helper: sync shared config/creds to a demo repo
+└── assets/                          ← media (served via GitHub Pages)
 ```
 
-Each topic is its own folder; the file inside is always `ONBOARDING.md` (matching how the Claude Code share links
-present it).
+Each playbook is one flat, topic-named `.md` file so it's easy to tell apart. When you share one via
+`ShareOnboardingGuide`, it's temporarily copied to the repo root as `ONBOARDING.md` (the only name that tool reads).
 
-## Adding a new playbook
+## Adding / changing a playbook
 
-1. Create a new topic folder with an `ONBOARDING.md` inside (write it so Claude coaches the user one step at a time,
-   verifies programmatically where it can, and confirms before any outward-facing action).
-2. For a **new integration type** (Workfront, Journey, …): model it on `add-target/` and **end it with a MANIFEST**
-   (files → dest paths, merge entries, notes, exclude) so **merge-back-to-base-template** can consume it.
-3. Share it: from that folder, generate a Claude Code onboarding link.
-4. Add a row to the table above.
+**These files are generated — don't edit them here.** Each `<topic>.md` is produced from the matching
+`aem-demo-playbooks/skills/<skill>/SKILL.md` by `scripts/gen-onboarding.mjs`.
+
+1. Edit (or add) the **skill** in the `aem-demo-playbooks` repo.
+2. Run `node scripts/gen-onboarding.mjs` (or `./sync.sh`) — it regenerates the paste-ins here.
+3. For a **new integration type** (Workfront, Journey, …): model the skill on `add-adobe-target` and **end it with a
+   MANIFEST** so `merge-back-to-base-template` can consume it. Add its name to the `MAP` in the generator.
+4. Share it and add a row to the table above.
 
 ---
 
