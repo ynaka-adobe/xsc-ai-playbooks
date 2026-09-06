@@ -4,8 +4,13 @@ Paste-into-Claude guides that help XSC teammates get more done with AI. Each pla
 `<topic>.md` file — copy it (or open its link), paste it into **Claude Code or claude.ai chat**, and Claude
 walks you through the task step by step. **No coding experience required.**
 
+**▶ Browse online:** **https://ynaka-adobe.github.io/xsc-ai-playbooks/** — open a playbook, click **Copy for
+Claude**, paste into Claude. Auto-updates on every push. (The `claude.ai/claude-code/onboard/…` links in the table
+below still work too — they launch a playbook directly in Claude Code.)
+
 > **These files are generated** from the `aem-demo-playbooks` plugin skills (the single source of truth) by
 > `scripts/gen-onboarding.mjs` in that repo. **Don't hand-edit them here** — edit the matching skill and regenerate.
+> The generator emits both the `<topic>.md` (for pasting / share links) and a rendered `<topic>.html` (for Pages).
 
 ## Playbooks
 
