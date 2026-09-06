@@ -1,15 +1,12 @@
+---
+name: eds-readiness
+description: One-time environment setup before building AEM Edge Delivery (EDS) demos — checks git/Node/AEM CLI, guides creating a GitHub account, and confirms readiness, then recommends the next step. Use when someone says "get me set up", "readiness check", "set up my machine for EDS demos", "am I ready to build a demo", or is starting EDS demo work for the first time.
+---
 
 # EDS Demo Readiness
 
-> **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
-> background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide
-> the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
-> this" — but Claude should begin even if you don't.)
->
-> _This playbook is auto-generated from the `eds-readiness` plugin skill. Edit the skill, not this file._
-
 Guide an Adobe XSC product specialist — possibly non-technical — so their machine and accounts are ready to build
-AEM Edge Delivery demos. This is **setup only**; building a demo is the `create-eds-repo` playbook.
+AEM Edge Delivery demos. This is **setup only**; building a demo is the `create-eds-repo` skill.
 
 ## How to run this
 
@@ -22,7 +19,7 @@ AEM Edge Delivery demos. This is **setup only**; building a demo is the `create-
 - Go one section at a time and confirm before moving on. Keep language plain.
 - The user creates their own GitHub account themselves — you guide, you don't do it for them. Never ask the user to
   paste passwords or tokens into chat.
-- At the end, give a short ✅ readiness summary, then recommend the next playbook based on intent (see step 4).
+- At the end, give a short ✅ readiness summary, then recommend the next skill based on intent (see step 4).
 
 ## 1. Check local tools
 
@@ -45,7 +42,7 @@ Install anything missing:
 
 > **No org or special naming needed.** Demo repos go directly under the personal GitHub account. The old
 > `<username>-adobe` org convention is gone: the AEM Code Sync **setup bot** now lets you add your admin account
-> directly (its **Users** step, in the `create-eds-repo` playbook), which is what the org name used to be a workaround
+> directly (its **Users** step, in the `create-eds-repo` skill), which is what the org name used to be a workaround
 > for. A GitHub org is optional; if used, any name works.
 
 ## 3. Connect the AEM DA content tools (recommended)
@@ -72,8 +69,8 @@ Confirm and summarize as a ✅ checklist:
 - *(Recommended)* the AEM DA MCP is connected (for content seeding).
 
 Then ask what the user wants to do next and recommend:
-- **"I just want to build a demo"** (most people) → the **`create-eds-repo`** playbook.
-- **"I want my own reusable base template first"** → the **`create-repo-template`** playbook (one-time), then
+- **"I just want to build a demo"** (most people) → the **`create-eds-repo`** skill.
+- **"I want my own reusable base template first"** → the **`create-base-template`** skill (one-time), then
   `create-eds-repo` for each demo.
 
 > Rule of thumb: if unsure, go straight to `create-eds-repo` — you can always make a base template later.

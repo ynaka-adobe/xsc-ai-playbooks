@@ -6,7 +6,7 @@
 > the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
 > this" — but Claude should begin even if you don't.)
 >
-> _This playbook is auto-generated from the `add-adobe-target` plugin skill. Edit the skill, not this file._
+> _Auto-generated from the `add-adobe-target` plugin skill. Edit the skill, not this file._
 
 Help an Adobe XSC product specialist add Adobe Target to an EDS site whose base **does not already include Target**
 (a standard boilerplate, or a base template before Target was merged in). Import the Target code/blocks/tools from

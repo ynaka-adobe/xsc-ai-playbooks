@@ -1,0 +1,27 @@
+{
+  "$comment": "Vertical base-template registry for AEM Edge Delivery demos. Vertical is orthogonal to the product toolset: the skills are vertical-agnostic; this maps a customer vertical to the base template (an EDS repo) a demo is stamped from. Add a vertical = add an entry (no code change). `template` empty = not built yet.",
+  "default": "manufacturing",
+  "verticals": {
+    "manufacturing": {
+      "label": "Manufacturing",
+      "template": "ynaka-adobe/da-demo-kit",
+      "status": "ready",
+      "notes": "The original build-out (Yuji). Blocks, tools, Target/Workfront integrations + manufacturing sample content."
+    },
+    "retail": {
+      "label": "Retail",
+      "template": "",
+      "status": "planned"
+    },
+    "financial-services": {
+      "label": "Financial Services",
+      "template": "",
+      "status": "planned"
+    },
+    "public-sector": {
+      "label": "Public Sector",
+      "template": "",
+      "status": "planned"
+    }
+  }
+}

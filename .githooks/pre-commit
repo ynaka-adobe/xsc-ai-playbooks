@@ -1,0 +1,39 @@
+#!/bin/sh
+# Monorepo pre-commit:
+#   1. bump the patch version of any plugin that has staged changes under its dir,
+#   2. regenerate the /docs catalog from the skills and stage it,
+# so every push carries fresh versions + an up-to-date catalog.
+# Enable once per clone: git config core.hooksPath .githooks
+set -e
+
+bump() {
+  mf="$1"
+  cur=$(grep -oE '"version"[[:space:]]*:[[:space:]]*"[0-9]+\.[0-9]+\.[0-9]+"' "$mf" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+  [ -n "$cur" ] || return 0
+  major=$(printf '%s' "$cur" | cut -d. -f1)
+  minor=$(printf '%s' "$cur" | cut -d. -f2)
+  patch=$(printf '%s' "$cur" | cut -d. -f3)
+  new="$major.$minor.$((patch + 1))"
+  sed -i.bak "s/\"version\"[[:space:]]*:[[:space:]]*\"$cur\"/\"version\": \"$new\"/" "$mf"
+  rm -f "$mf.bak"
+  git add "$mf"
+  echo "pre-commit: bumped $(dirname "$(dirname "$mf")") version $cur -> $new"
+}
+
+staged=$(git diff --cached --name-only)
+for mf in plugins/*/.claude-plugin/plugin.json; do
+  [ -f "$mf" ] || continue
+  pdir=$(dirname "$(dirname "$mf")")   # plugins/<name>
+  # bump if anything under this plugin (other than the manifest itself) is staged
+  if printf '%s\n' "$staged" | grep -q "^$pdir/" ; then
+    bump "$mf"
+  fi
+done
+
+# Regenerate the catalog (same repo → we can stage it directly).
+if command -v node >/dev/null 2>&1 && [ -f scripts/gen-catalog.mjs ]; then
+  if node scripts/gen-catalog.mjs >/dev/null 2>&1; then
+    git add docs
+    echo "pre-commit: regenerated /docs catalog"
+  fi
+fi

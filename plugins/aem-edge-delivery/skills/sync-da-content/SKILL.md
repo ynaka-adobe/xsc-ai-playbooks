@@ -1,12 +1,9 @@
+---
+name: sync-da-content
+description: Sync full DA config + credentials from da-demo-kit to target repos. Syncs all config sheets (data, library, apps, prepare) plus Adobe Target and Workfront credentials. Use when an end user says "sync content from da-demo-kit", "set up my repo config", or "populate my site with default config".
+---
 
 # Sync Content from da-demo-kit to Your DA Repo
-
-> **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
-> background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide
-> the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
-> this" — but Claude should begin even if you don't.)
->
-> _This playbook is auto-generated from the `sync-da-content` plugin skill. Edit the skill, not this file._
 
 Automatically populate your target DA repo with complete default configuration from `ynaka-adobe/da-demo-kit`, including all config sheets and integration credentials.
 
@@ -26,7 +23,7 @@ Automatically populate your target DA repo with complete default configuration f
 
 ## Prerequisites
 
-Your target DA repo must already be connected to your Claude instance. If you haven't done this yet, run the `readiness` playbook first to set up your environment.
+Your target DA repo must already be connected to your Claude instance. If you haven't done this yet, run the `eds-readiness` playbook first to set up your environment.
 
 ## One-time setup: authorize config writes (per target org)
 
@@ -163,7 +160,7 @@ View your config at: `https://da.live/config#/your-org/your-site/`
 | Credentials sheet empty | Verify the source sheets exist in da-demo-kit |
 | Action returns 401 (config PUT) | The config write needs an **IMS S2S** Bearer, and the target org's `permissions` sheet must grant that identity `write` on `CONFIG` — see "One-time setup" above. A helix Site Admin key won't work here. |
 | DA MCP failing / `da_*` tools erroring or hanging / "server disconnected" | **Disconnect the AEM DA connector and reconnect it** (claude.ai connector settings, or `/mcp` in an interactive terminal), then retry. A stale/expired connection is the usual cause. |
-| **`/actions/sync-config` (or `/sync-content`) returns 404** | The I/O Runtime action **isn't deployed/reachable** — EDS sites don't serve `/actions/…` by default. **Deploy it:** `aio app deploy` the `actions/` from da-demo-kit to your I/O Runtime namespace, set env (`ADMIN_API_KEY`, etc.), then point this playbook's URLs at the real `…adobeioruntime.net/api/v1/web/…` endpoint. **To unblock now:** use the **interim direct method** above (maintainer + `DA_Token`). |
+| **`/actions/sync-config` (or `/sync-content`) returns 404** | The I/O Runtime action **isn't deployed/reachable** — EDS sites don't serve `/actions/…` by default. **Deploy it:** `aio app deploy` the `actions/` from da-demo-kit to your I/O Runtime namespace, set env (`ADMIN_API_KEY`, etc.), then point this skill's URLs at the real `…adobeioruntime.net/api/v1/web/…` endpoint. **To unblock now:** use the **interim direct method** above (maintainer + `DA_Token`). |
 
 ## Next Steps
 

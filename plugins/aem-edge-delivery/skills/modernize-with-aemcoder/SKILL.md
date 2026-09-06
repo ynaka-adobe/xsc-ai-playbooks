@@ -1,12 +1,9 @@
+---
+name: modernize-with-aemcoder
+description: Path A — migrate a real website's pages, design, and content into an EDS repo using the Experience Modernization Agent (aemcoder.adobe.io). Hands the user exact prompts to paste into the aemcoder chat. Use when someone says "modernize <site>", "migrate a site with aemcoder", "migrate pages to EDS", "use the Experience Modernization Agent", or "convert a website to Edge Delivery".
+---
 
 # Modernize a Site with the Experience Modernization Agent (Path A)
-
-> **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
-> background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide
-> the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
-> this" — but Claude should begin even if you don't.)
->
-> _This playbook is auto-generated from the `modernize-with-aemcoder` plugin skill. Edit the skill, not this file._
 
 Coach an Adobe XSC product specialist — possibly non-technical — through an EMA migration. You **cannot operate
 aemcoder.adobe.io** — it is a hosted chat agent the user drives in their browser. Your job: verify setup, hand over
@@ -155,7 +152,7 @@ Publish (live domain uses `.aem.live`) two ways:
 
 | Resource | Link |
 |---|---|
-| Prerequisite | the `create-eds-repo` playbook |
+| Prerequisite | the `create-eds-repo` skill |
 | Experience Modernization Agent | https://aemcoder.adobe.io/ |
 | AEM Code Sync app | https://github.com/apps/aem-code-sync |
 | da-demo-kit template | https://github.com/ynaka-adobe/da-demo-kit |

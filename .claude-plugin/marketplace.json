@@ -1,0 +1,21 @@
+{
+  "name": "ynaka-adobe",
+  "owner": {
+    "name": "Adobe XSC"
+  },
+  "metadata": {
+    "description": "Adobe XSC marketplace — AI toolsets for building AEM demos, one plugin per product (Edge Delivery today; Assets, Guides next), plus a concierge that routes you to the right one."
+  },
+  "plugins": [
+    {
+      "name": "xsc",
+      "source": "./plugins/xsc",
+      "description": "XSC concierge: start here. Asks what you're building (which AEM product, which customer vertical) and points you to the right toolset and playbook. Also updates the marketplace."
+    },
+    {
+      "name": "aem-edge-delivery",
+      "source": "./plugins/aem-edge-delivery",
+      "description": "AEM Edge Delivery (EDS) demo toolset: readiness, base template, repo creation, aemcoder modernization, Adobe Target, config sync, and merge-back — vertical-aware via a base-template registry."
+    }
+  ]
+}

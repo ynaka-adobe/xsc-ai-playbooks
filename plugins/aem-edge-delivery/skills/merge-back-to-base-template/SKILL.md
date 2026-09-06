@@ -1,16 +1,13 @@
+---
+name: merge-back-to-base-template
+description: Fold a completed integration (e.g. Adobe Target) from a demo repo into your base template using the integration's MANIFEST, so every future demo inherits it. Use when someone says "merge my integration back", "add this feature to my base template", "make this reusable for future demos", or has finished building an integration on a demo and wants it in the template.
+---
 
 # Merge Back to Base Template
 
-> **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
-> background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide
-> the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
-> this" — but Claude should begin even if you don't.)
->
-> _This playbook is auto-generated from the `merge-back-to-base-template` plugin skill. Edit the skill, not this file._
-
 Help an Adobe XSC product specialist merge a **completed integration** from a **demo repo** into their **base
 template** (the shared `ynaka-adobe/da-demo-kit`, or their own `<owner>/<template-name>`), using the integration's
-**MANIFEST** (the artifact list at the end of each integration playbook, e.g. `add-target`).
+**MANIFEST** (the artifact list at the end of each integration skill, e.g. `add-adobe-target`).
 
 ## How to run this
 

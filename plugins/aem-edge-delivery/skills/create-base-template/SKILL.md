@@ -1,19 +1,19 @@
+---
+name: create-base-template
+description: Guide creating your own reusable EDS base template repo — copy a starter (e.g. da-demo-kit) into your GitHub account and mark it as a template so every future demo starts from it. Use when someone says "create my own base template", "make a reusable template repo", "set up a demo base template", or wants a template they can accumulate custom demo features in over time.
+---
 
 # Create Your Own Base Template
 
-> **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
-> background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide
-> the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
-> this" — but Claude should begin even if you don't.)
->
-> _This playbook is auto-generated from the `create-base-template` plugin skill. Edit the skill, not this file._
-
-Guide an Adobe XSC product specialist — possibly non-technical — through creating their **own reusable base
-template repository** for AEM Edge Delivery (EDS) demos. The base template is the launch point for every demo; over
-time the user merges demo customizations back into it so it accumulates reusable functionality.
+Guide an Adobe XSC product specialist — possibly non-technical — through creating a **reusable base template
+repository** for AEM Edge Delivery (EDS) demos. Most commonly this is a **vertical base template** — a template
+themed for a customer industry (retail, financial services, public sector, …) that doesn't have one yet — but it can
+also just be the user's personal template. The base template is the launch point for every demo; over time the user
+merges demo customizations back into it so it accumulates reusable functionality. A vertical template, once created,
+is registered in `verticals.json` so `create-eds-repo` offers it automatically.
 
 **Lifecycle (state it plainly if the user is unsure why they're here):**
-1. **This playbook** → create a base template repo (once).
+1. **This skill** → create a base template repo (once).
 2. **`create-eds-repo`** → for each customer, create a demo repo *from* the base template.
 3. **Customize** → build something new in the demo (e.g. a Target integration).
 4. **`merge-back-to-base-template`** → fold that customization into the base template so the next demo inherits it.
@@ -31,7 +31,7 @@ time the user merges demo customizations back into it so it accumulates reusable
 
 ## Step 0 — Prerequisites
 
-The user needs the `readiness` setup done (a GitHub account). Confirm:
+The user needs the `eds-readiness` setup done (a GitHub account). Confirm:
 ```bash
 gh auth status
 ```
@@ -65,16 +65,24 @@ gh repo create <owner>/<template-name> --template ynaka-adobe/da-demo-kit --publ
 **CLI (confirm first):** `gh repo edit <owner>/<template-name> --template`
 Verify: `gh repo view <owner>/<template-name> --json isTemplate` → expect `{"isTemplate": true}`.
 
-## Step 4 — Confirm and record
+## Step 4 — Confirm and register
 
 - ✅ Repo `<owner>/<template-name>` exists, is **Public**, marked **Template repository**.
-- 📌 Have the user note the template as `<owner>/<template-name>` — they'll give it to `create-eds-repo` in place of
-  `ynaka-adobe/da-demo-kit` for each demo.
+- **If this is a vertical template, register it** so `create-eds-repo` offers it automatically: add/update the
+  vertical's entry in **`plugins/aem-edge-delivery/verticals.json`** — set its `template` to `<owner>/<template-name>`
+  and `status` to `ready`. (Ask which vertical via an AskUserQuestion dialog; if it's a brand-new vertical not in the
+  file, add a new entry with a `label`.) Example:
+  ```json
+  "retail": { "label": "Retail", "template": "<owner>/<template-name>", "status": "ready" }
+  ```
+  Then commit that change to the `xsc-ai-playbooks` repo (or open a PR) so every XSC's `create-eds-repo` sees it.
+- 📌 If it's just a **personal** (non-vertical) template, no registration needed — the user picks "my own template"
+  in `create-eds-repo` and supplies `<owner>/<template-name>`.
 
 ## Step 5 — Later: grow the base template
 
 When a demo produces something reusable, fold it back into the base template with the `merge-back-to-base-template`
-playbook (driven by that integration's MANIFEST). Keep base-template changes **generic** — strip customer content,
+skill (driven by that integration's MANIFEST). Keep base-template changes **generic** — strip customer content,
 names, and URLs before merging.
 
 ## Reference links

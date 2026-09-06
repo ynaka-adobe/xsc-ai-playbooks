@@ -1,21 +1,19 @@
+---
+name: create-eds-repo
+description: Create the base EDS demo repo — make a repo from a template, install AEM Code Sync, and complete the bot setup wizard (creates the content repo, EDS site, and admin user), then fork to modernization (Path A) or integrations (Path B). Use when someone says "create an EDS repo", "start a new demo", "build an EDS demo", "spin up a demo repo", or "set up a demo site".
+---
 
 # Create Your EDS Repo (Base)
 
-> **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
-> background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide
-> the user through them one at a time, beginning with the first phase. (Human: you can just say "walk me through
-> this" — but Claude should begin even if you don't.)
->
-> _This playbook is auto-generated from the `create-eds-repo` plugin skill. Edit the skill, not this file._
-
 Guide an Adobe XSC product specialist — possibly non-technical — through creating the **base EDS repo** every demo
-builds on. The repo is created from a **base template** (the shared `ynaka-adobe/da-demo-kit`, or the user's own
-from `create-repo-template`). This playbook **ends at a fork** — it does not migrate content or build integrations; it
-hands off to Path A or Path B.
+builds on. The repo is stamped from a **vertical base template** chosen by the customer's **industry vertical**
+(manufacturing, retail, …) — resolved from the toolset's `verticals.json` registry — or the user's own template from
+`create-base-template`. This skill **ends at a fork** — it does not migrate content or build integrations; it hands
+off to Path A or Path B.
 
 ## How to run this
 
-> **MANDATORY — ask with clickable dialogs.** For EVERY question, choice, or input in this playbook (site name,
+> **MANDATORY — ask with clickable dialogs.** For EVERY question, choice, or input in this skill (site name,
 > template, owner, **seeding method**, the Path A vs B fork), you MUST call the **AskUserQuestion** tool — options
 > for choices, the free-text box for open answers like a site name. **NEVER** present choices as a numbered or
 > bulleted prose list, and never ask the user to reply in plain text. If you are about to type "Option 1… Option 2…"
@@ -24,9 +22,8 @@ hands off to Path A or Path B.
 - Adapt to your environment: if you have terminal/browsing tools, run checks, create the repo with `gh`, and fetch
   the preview URL yourself (with a clear go-ahead); otherwise give exact browser clicks and have the user report.
 - One step at a time; confirm before moving on. Explain *why* in one sentence.
-- **Gather up front** (skip any you can infer): (1) customer/site name → repo name, lowercase, no spaces; (2) which
-  base template — shared `ynaka-adobe/da-demo-kit` or the user's own `<owner>/<template-name>` (use it everywhere as
-  `<TEMPLATE>`; default `ynaka-adobe/da-demo-kit`); (3) whether it's their first time.
+- **Gather up front** (skip any you can infer): (1) customer/site name → repo name, lowercase, no spaces; (2) the
+  **customer vertical** → resolves to `<TEMPLATE>` via `verticals.json` (see Phase 0); (3) whether it's their first time.
 - Guardrails: creating a repo and installing GitHub apps are outward-facing — summarize and get a clear "yes" first.
   Never have the user paste tokens into chat.
 
@@ -34,15 +31,31 @@ hands off to Path A or Path B.
 > optional; any name works). The demo's **admin** is set by the AEM Code Sync bot wizard's **Users** step (Phase 3),
 > not by an org name.
 
+## Phase 0 — Pick the vertical (resolve `<TEMPLATE>`)
+
+The demo should be themed for the **customer's industry**. **Ask the vertical with an AskUserQuestion dialog**, with
+options read from this toolset's registry `verticals.json` (`plugins/aem-edge-delivery/verticals.json`): show each
+vertical's `label`, marking `status: planned` ones as "not built yet". Then resolve `<TEMPLATE>`:
+
+- Vertical `status: ready` → use its `template` (e.g. **Manufacturing → `ynaka-adobe/da-demo-kit`**).
+- Vertical `status: planned` (empty `template`) → there's **no vertical template yet**. Offer, via the dialog:
+  (a) **build one first** with `create-base-template` (then come back), or (b) **start from Manufacturing**
+  (`ynaka-adobe/da-demo-kit`) and re-theme during Path A/B. Don't invent a template repo that doesn't exist.
+- Also offer **"my own template"** → free-text `<owner>/<template-name>` (for XSCs who made their own via
+  `create-base-template`).
+
+Whatever is chosen is `<TEMPLATE>` for the rest of this skill. Default vertical = the registry's `default`
+(manufacturing).
+
 ## Phase 1 — Prerequisites
 
-The user needs `readiness` done (a GitHub account). Confirm:
+The user needs `eds-readiness` done (a GitHub account). Confirm:
 ```bash
 gh auth status
 git --version
 ```
-`gh` isn't required — everything can be done in the browser — but it lets you create the repo for them. Confirm the
-template choice: shared `ynaka-adobe/da-demo-kit` or their own `<owner>/<template-name>` → that's `<TEMPLATE>`.
+`gh` isn't required — everything can be done in the browser — but it lets you create the repo for them. `<TEMPLATE>`
+was resolved in Phase 0 from the chosen vertical.
 
 ## Phase 2 — Create the repo from the template
 
@@ -85,11 +98,11 @@ site, and admin user.
 wiring. An empty config = seeded content that doesn't render correctly.
 
 Config is a **`PUT` to `admin.da.live/config`** (not a content write), so — unlike content — it needs a DA
-credential **and** a per-org permission grant. This is what the **`sync-da-content`** playbook / the `sync-config`
+credential **and** a per-org permission grant. This is what the **`sync-da-content`** skill / the `sync-config`
 action handle. Two prerequisites:
 
 1. **Grant your org `write`** — in your org's `da.live/config` → **`permissions`** sheet, add the four rows (both
-   IMS orgs, `write` on `CONFIG` and `/ + **`). Exact rows + screenshot are in the **`sync-da-content`** playbook. Skip
+   IMS orgs, `write` on `CONFIG` and `/ + **`). Exact rows + screenshot are in the **`sync-da-content`** skill. Skip
    if already granted — org-level grants cover every site in the org.
 2. **Run the config sync — Claude calls the action itself** (via `Bash`+`curl` or `WebFetch`; do **not** hand the
    user a URL to click):
@@ -97,7 +110,7 @@ action handle. Two prerequisites:
    curl -s "https://332794-dademokitappbuilder.adobeioruntime.net/api/v1/web/da-demo-kit/sync-config?targetOrg=<owner>&targetRepo=<site>"
    ```
    The server-side action mints an IMS token from its stored S2S credential, reads da-demo-kit's config with it, and
-   PUTs it to the site. Confirm the response is `{"success":true}`. See the **`sync-da-content`** playbook for details.
+   PUTs it to the site. Confirm the response is `{"success":true}`. See the **`sync-da-content`** skill for details.
 3. **Sync the credential sheets — Claude calls these too.** `sync-config` copies the config store but **not** the
    `.da/*` credential sheets, so sync both `.da/adobe-target.json` and `.da/adobe-workfront.json` separately:
    ```bash
@@ -136,7 +149,7 @@ preview URL for HTTP 200). If it already has content, skip this phase.
    → **Copy** → open `https://da.live/#/<owner>/<demo>` → **Paste**.
 
 > If the AEM DA MCP is **not** connected, still show option 1 but note it's unavailable until they connect it (see
-> the `readiness` playbook), and default the recommendation to option 2.
+> the `eds-readiness` skill), and default the recommendation to option 2.
 
 After seeding, **publish** so preview/live render (*confirm first — it's public*), then **verify**
 `https://main--<demo>--<owner>.aem.page/` returns HTTP 200 with the homepage. Two ways to publish (see
@@ -179,12 +192,12 @@ The base is done and the site has config **and** default content. Ask which path
 ### Path A — Modernize a real site
 > Migrate an existing website's pages, design, and content into this repo.
 
-➡️ Continue with the **`modernize-with-aemcoder`** playbook. This playbook ends here.
+➡️ Continue with the **`modernize-with-aemcoder`** skill. This skill ends here.
 
 ### Path B — Build tool integrations
 > Build integrations (Target, Workfront, etc.) on the default content seeded in Phase 5.
 
-➡️ Continue with an integration playbook (e.g. **`add-target`**). When it works, finish with
+➡️ Continue with an integration skill (e.g. **`add-adobe-target`**). When it works, finish with
 **`merge-back-to-base-template`**.
 
 ## Troubleshooting
