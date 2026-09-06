@@ -174,7 +174,7 @@ only works *within* one site, so **read from the source and write to the new sit
 returns HTTP 200 with the homepage. Two ways to publish:
 - **Browser (default):** Sidekick or Traverse → **Bulk Operations → Publish** (works because you're logged in).
   📹 **Video tutorial — bulk publish with the DA app:**
-  https://github.com/ynaka-adobe/da-demo-kit/blob/main/actions/assets/bulk-publish.mp4
+  https://github.com/ynaka-adobe/xsc-ai-playbooks/blob/main/assets/bulk-publish.mp4
   Offer this link whenever the user needs to publish manually (e.g. programmatic publish isn't set up).
 - **Admin API + token (automatable):** the admin API needs a `publish` API key — unauthenticated calls return **401**.
   Create a key once (`POST https://admin.hlx.page/config/<owner>/sites/<site>/apiKeys.json` with
