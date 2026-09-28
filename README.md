@@ -23,7 +23,7 @@ xsc-ai-playbooks/                        ← this repo = the marketplace (ynaka-
 ├── .claude-plugin/marketplace.json      ← lists every plugin below
 ├── plugins/
 │   ├── xsc/                             ← Layer 1: the concierge (routing + update)
-│   │   └── skills/ (find-playbook, update-playbooks)
+│   │   └── skills/ (create-demo, update-plugin)
 │   └── aem-edge-delivery/               ← Layer 2: the EDS demo toolset
 │       ├── skills/ (eds-readiness, create-base-template, create-eds-repo,
 │       │            modernize-with-aemcoder, add-adobe-target, sync-da-content,
@@ -40,7 +40,7 @@ claude plugin marketplace add ynaka-adobe/xsc-ai-playbooks
 claude plugin install xsc@ynaka-adobe                 # the concierge — start here
 claude plugin install aem-edge-delivery@ynaka-adobe   # the EDS toolset
 ```
-Then restart Claude Code. Not sure where to start? Run the concierge: **`/find-playbook`**.
+Then restart Claude Code. Not sure where to start? Run the concierge: **`/create-demo`**.
 
 ## Adding things
 

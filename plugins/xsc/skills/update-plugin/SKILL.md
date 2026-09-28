@@ -1,5 +1,5 @@
 ---
-name: update-playbooks
+name: update-plugin
 description: Update the XSC demo toolsets (xsc concierge + aem-edge-delivery, plus future product plugins) to their latest published versions — refreshes the marketplace and updates installed plugins, then tells the user to restart. Use when someone says "update the playbooks", "update the toolsets", "get the latest", "am I on the latest", or reports that a new skill/feature isn't showing up.
 ---
 

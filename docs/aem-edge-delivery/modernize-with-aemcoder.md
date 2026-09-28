@@ -1,5 +1,5 @@
 
-# Use Experience Modernization Agent to migrate a customer site 
+# Modernize a Site with the Experience Modernization Agent (Path A)
 
 > **▶ Claude — this file _is_ the task.** If it was just pasted into our conversation, don't treat it as
 > background reference and don't wait for a separate instruction — **start now**: follow the steps below and guide

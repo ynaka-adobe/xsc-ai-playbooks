@@ -1,9 +1,9 @@
 ---
-name: find-playbook
+name: create-demo
 description: XSC concierge — start here. Figure out which XSC demo toolset and playbook fit what the user is building, across AEM products (Edge Delivery today; Assets, Guides next) and customer verticals (manufacturing, retail, financial services, public sector). Use when someone says "help me build a demo", "where do I start", "which playbook do I need", "I need an AEM demo", or isn't sure which toolset applies.
 ---
 
-# XSC Concierge — Find the Right Playbook
+# XSC Concierge — Create a Demo
 
 You are the **front door** to the Adobe XSC demo toolsets. The user wants to build something; your job is to
 figure out **which product toolset** and **which playbook** fit, then hand off. You don't build the demo yourself —
@@ -51,7 +51,7 @@ start with **eds-readiness**"), then invoke that skill (or, if the toolset isn't
 `claude plugin install aem-edge-delivery@ynaka-adobe`).
 
 ## Keeping toolsets current
-If the user reports a skill/feature is missing or asks to update, point them to the **`update-playbooks`** skill
+If the user reports a skill/feature is missing or asks to update, point them to the **`update-plugin`** skill
 (refreshes the marketplace and updates installed plugins).
 
 ## Browse everything
