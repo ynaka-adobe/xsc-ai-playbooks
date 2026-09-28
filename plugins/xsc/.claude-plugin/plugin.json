@@ -1,6 +1,6 @@
 {
   "name": "xsc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Adobe XSC concierge — the front door to the XSC demo toolsets. Asks what you're building (which AEM product, which customer vertical) and routes you to the right toolset and playbook. Also keeps the marketplace up to date.",
   "author": {
     "name": "Adobe XSC"
