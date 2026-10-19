@@ -56,6 +56,10 @@ Edit a **skill** → commit (the pre-commit hook bumps the changed plugin's vers
 run **`./sync.sh`** (push + refresh marketplace + update installs) → restart Claude Code. GitHub Pages rebuilds
 `/docs` automatically on push. `node scripts/gen-catalog.mjs --check` fails if `/docs` is stale (CI-ready).
 
+No hook installed (e.g. a PR from the web UI or an agent)? The **Bump plugin versions** GitHub Action is the
+backstop: on every push to `main` it bumps the patch version of any plugin whose files changed without a version
+bump, regenerates `/docs`, and commits the result.
+
 ---
 
 *Part of the XSC effort to incorporate AI for greater efficiency.*
