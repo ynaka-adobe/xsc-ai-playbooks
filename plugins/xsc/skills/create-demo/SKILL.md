@@ -44,7 +44,7 @@ Given product = Edge Delivery, route by what they want to do:
   fork to Path A or Path B).
 - **Migrate a real customer site?** → Path A: **`modernize-with-aemcoder`**.
 - **Add an integration (Target, …)?** → Path B: **`add-adobe-target`**.
-- **Add per-user storage (favorites, My List, avatars, preferences)?** → **`create-stash`**.
+- **Add per-user storage (favorites, My List, preferences)?** → **`create-stash`**.
 - **Fold a finished integration into the base template?** → **`merge-back-to-base-template`**.
 
 Confirm the pick in one sentence ("Sounds like a **manufacturing Edge Delivery** demo, first one on this machine —
