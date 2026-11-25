@@ -1,0 +1,21 @@
+Adobe Target integration resources
+
+Source: https://github.com/ynaka-adobe/da-demo-kit
+Revision: 28d116639fd30e75c4cfccfa7cad695e284aecae
+The allowlisted Git assets under eds/ are unmodified source copies except
+tools/target/target.css: equivalent rule ordering/formatting and a matching
+kebab-case animation name were adapted for the supported boilerplate's lint.
+The source repository distributes LICENSE (Apache License, Version 2.0),
+included here as da-demo-kit-APACHE-2.0.txt.
+
+deps/at/vendor-at.js retains its upstream notices:
+at.js 2.11.8 | (c) Adobe Systems Incorporated | All rights reserved
+zepto.js | (c) 2010-2016 Thomas Fuchs | zeptojs.com/license
+
+The Zepto MIT license is also included as zepto-MIT.txt, retrieved from
+https://github.com/madrobby/zepto at revision
+e1ecb3d70b2afaa6d380a35fb97ccd8e693d895d.
+
+The source tree contains no root NOTICE file.
+New neutral DA templates and merge snippets are documented separately in assets/README.md.
+Destination modifications must retain these notices and identify changed source files.

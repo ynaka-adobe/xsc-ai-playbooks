@@ -1,0 +1,2 @@
+  await loadTarget();
+  await applyTargetHeroMboxIfConfigured();

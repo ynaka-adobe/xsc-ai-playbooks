@@ -1,0 +1,8 @@
+{
+  "id": "target",
+  "title": "Target",
+  "url": "https://experience.adobe.com/#/@acsmarketing/target/activities/activityLibrary",
+  "passConfig": true,
+  "environments": ["preview", "live", "edit"],
+  "includePaths": ["**"]
+}

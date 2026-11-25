@@ -1,0 +1,185 @@
+{
+  "integration": "adobe-target",
+  "resourceRoot": "relative to the loaded SKILL.md: assets/",
+  "source": {
+    "repo": "ynaka-adobe/da-demo-kit",
+    "revision": "28d116639fd30e75c4cfccfa7cad695e284aecae",
+    "url": "https://github.com/ynaka-adobe/da-demo-kit/tree/28d116639fd30e75c4cfccfa7cad695e284aecae"
+  },
+  "supportedFixture": {
+    "repo": "adobe/aem-boilerplate",
+    "revision": "9a904130e124feebeee199f35eddb8fc8931488e"
+  },
+  "copyPolicy": "Create missing; skip byte-identical; preserve differing files and request a reviewed update.",
+  "copies": [
+    {
+      "group": "client",
+      "source": "eds/scripts/target.js",
+      "destination": "scripts/target.js",
+      "sha256": "cdf6de27add63ad1464a67422377f7484917c34a983662e1363980aa47da0c30"
+    },
+    {
+      "group": "client",
+      "source": "eds/deps/at/at.js",
+      "destination": "deps/at/at.js",
+      "sha256": "5daea24fb7065ea7ebcf12cfc23bb3ce356f9f01957c7fe34f89c30c3072ed61"
+    },
+    {
+      "group": "client",
+      "source": "eds/deps/at/vendor-at.js",
+      "destination": "deps/at/vendor-at.js",
+      "sha256": "c9366ff7d93034b5e43d78d02d8eb1a1244eaceda475ae2a4f11ed535928536f"
+    },
+    {
+      "group": "block",
+      "source": "eds/blocks/target-offer/target-offer.js",
+      "destination": "blocks/target-offer/target-offer.js",
+      "sha256": "4be6bb4196443d339b2d0bf3bca85f09e40e903271ecc895a036717b41a48196"
+    },
+    {
+      "group": "block",
+      "source": "eds/blocks/target-offer/target-offer.css",
+      "destination": "blocks/target-offer/target-offer.css",
+      "sha256": "4a2acda364a2447c0bfcd388f7c56c97e315f18c4e9116745e68d500c21caa5a"
+    },
+    {
+      "group": "block",
+      "source": "eds/blocks/target-offer/metadata.json",
+      "destination": "blocks/target-offer/metadata.json",
+      "sha256": "511ee98ed6dc017e5fc114f87619e903c60ed23dc96f4edbac17fc359db40cc7"
+    },
+    {
+      "group": "hosted-tool",
+      "source": "eds/tools/target/target.html",
+      "destination": "tools/target/target.html",
+      "sha256": "c2a3fb2944d10a478b82052b8015cafff033278cae0e189d15b99603016dc591"
+    },
+    {
+      "group": "hosted-tool",
+      "source": "eds/tools/target/target-v2.js",
+      "destination": "tools/target/target-v2.js",
+      "sha256": "d50aaf41eec4898c83eddfa53fe4c55ca56a24d88e573bd18e4043dce628b638"
+    },
+    {
+      "group": "hosted-tool",
+      "source": "eds/tools/target/target.css",
+      "destination": "tools/target/target.css",
+      "upstreamSha256": "eee1791e0f3dcd3a4f431d9a517fc36f6ea13fa27a8515346e93d3760ff52ce3",
+      "sha256": "98ac3702462cd696ad7f670af9dfae6aacc8ef5235beff5f877e9683a63bffae",
+      "modifications": "Equivalent rule ordering/formatting, redundant declarations removed, and matching kebab-case animation name for supported fixture lint."
+    },
+    {
+      "group": "ue",
+      "source": "eds/ue/models/blocks/target-offer.json",
+      "destination": "ue/models/blocks/target-offer.json",
+      "sha256": "f0917e62ee7173d6ca1a35046ab350de5a324d4ff1d2c289e4d2da677c59583c"
+    },
+    {
+      "group": "licenses",
+      "source": "licenses/da-demo-kit-APACHE-2.0.txt",
+      "destination": "deps/at/licenses/da-demo-kit-APACHE-2.0.txt"
+    },
+    {
+      "group": "licenses",
+      "source": "licenses/zepto-MIT.txt",
+      "destination": "deps/at/licenses/zepto-MIT.txt"
+    },
+    {
+      "group": "licenses",
+      "source": "licenses/NOTICE-target.txt",
+      "destination": "deps/at/licenses/NOTICE-target.txt"
+    }
+  ],
+  "merges": [
+    {
+      "group": "client",
+      "source": "merge/scripts-import.js",
+      "destination": "scripts/scripts.js",
+      "operation": "Merge imported names from ./target.js; do not duplicate existing imports."
+    },
+    {
+      "group": "client",
+      "source": "merge/scripts-after-lazy.js",
+      "destination": "scripts/scripts.js",
+      "operation": "Merge calls in loadPage after awaited loadLazy and before loadDelayed; preserve other integrations."
+    },
+    {
+      "group": "client",
+      "source": "merge/head.html",
+      "destination": "head.html",
+      "operation": "Merge active metadata by name, preserving unrelated head content; resolve conflicting Target values explicitly."
+    },
+    {
+      "group": "hero",
+      "source": "merge/hero-metadata.html",
+      "destination": "head.html or destination page Metadata",
+      "operation": "Replace DESTINATION_MBOX and selector; merge by metadata name at the chosen scope."
+    },
+    {
+      "group": "client",
+      "source": "merge/eslintignore.txt",
+      "destination": ".eslintignore",
+      "operation": "Append exact vendor path once, preserving all existing exclusions and a separating newline."
+    },
+    {
+      "group": "sidekick",
+      "source": "merge/sidekick-target.json",
+      "destination": "tools/sidekick/config.json",
+      "operation": "Merge plugins entry by id=target; preserve other fields/entries; use approved tenant link."
+    },
+    {
+      "group": "hosted-tool",
+      "source": "merge/eslint-hosted-sdk.json",
+      "destination": ".eslintrc.js",
+      "operation": "Merge hosted SDK into settings import/core-modules; preserve existing lint rules/settings. Adapt to destination lint format."
+    },
+    {
+      "group": "hosted-tool",
+      "source": "merge/stylelint-hosted-tool.json",
+      "destination": ".stylelintrc.json",
+      "operation": "Merge file-scoped BEM selector convention into overrides by tools/target/target.css; preserve existing rules/overrides and reject conflicting patterns."
+    }
+  ],
+  "existingDependencies": [
+    "scripts/aem.js must export compatible getMetadata; preserve the existing helper.",
+    "scripts/scripts.js must support the inspected EDS lazy lifecycle; inspect variants before editing.",
+    "UE requires separately discovered model/definition/filter registration; copying its model alone is insufficient."
+  ],
+  "da": [
+    {
+      "source": "da/library-index-row.json",
+      "destination": "DA /docs/library/blocks.json",
+      "operation": "Substitute owner/site; merge Target Offer row into existing data without replacing the sheet."
+    },
+    {
+      "source": "da/target-offer.html",
+      "destination": "DA /docs/library/blocks/target-offer.html",
+      "operation": "Substitute DESTINATION_MBOX; create missing authored example or review differences; preserve destination content."
+    },
+    {
+      "source": null,
+      "destination": "DA library and optional Target tool config registration",
+      "status": "external-unverified",
+      "operation": "Discover authorized config scope, entry names and schema; merge destination URLs only after write approval."
+    },
+    {
+      "source": null,
+      "destination": "DA .da/adobe-target.json, only for a verified consuming path",
+      "status": "external-secure-provisioning",
+      "operation": "Existence verified only. Never copy credential values; authorized maintainer verifies schema/consumer and provisions destination config securely."
+    }
+  ],
+  "external": [
+    "Approved Target tenant at.js settings, access, consent/CSP, and matching activity/mbox/selector.",
+    "Hosted SDK https://da.live/nx/utils/sdk.js and optional authorized target-activities Runtime availability.",
+    "DA permissions/config access and content preview/publish are separate from Git/AEM Code Sync.",
+    "Independent backend deployment and credentials are not bundled or installed."
+  ],
+  "exclude": [
+    ".da credential content, tokens, and permission exports",
+    "tools/target/actions/**",
+    "tools/target/refresh-token.mjs",
+    "workers/website/handlers/target.js",
+    "Unrelated DA content, library rows, and customer assets"
+  ]
+}

@@ -46,6 +46,14 @@ Then restart Claude Code. Not sure where to start? Run the concierge: **`/create
 
 - **A new playbook** → add a skill under `plugins/<product>/skills/<name>/SKILL.md`. The catalog regenerates on
   commit. (Don't edit `/docs` by hand — it's generated.)
+- **Reusable skill resources** → keep them alongside `SKILL.md` in the skill's `assets/` directory, inside
+  the registered plugin root. Resolve them relative to the loaded skill, not the destination repo. The
+  `add-adobe-target` skill includes pinned non-secret EDS assets and a source-to-destination manifest;
+  invoke `/aem-edge-delivery:add-adobe-target` in Claude Code in a clean or existing EDS repo with
+  `aem-edge-delivery` loaded (or select the host's exposed `add-adobe-target` skill). To try an unpublished
+  checkout, start Claude Code in the EDS repo with
+  `claude --plugin-dir /absolute/path/to/xsc-ai-playbooks/plugins/aem-edge-delivery`.
+  Generated catalog pages are documentation, not installed resource bundles.
 - **A new product toolset** (e.g. `aem-assets`) → add `plugins/aem-assets/` (with `.claude-plugin/plugin.json` +
   `skills/`) and one entry in `marketplace.json`. It shows up in the catalog and concierge automatically.
 - **A new vertical** → add an entry to the product's `verticals.json` (a `label` + a `template` repo). No code change.

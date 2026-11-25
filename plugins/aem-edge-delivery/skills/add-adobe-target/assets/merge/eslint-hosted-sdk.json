@@ -1,0 +1,5 @@
+{
+  "settings": {
+    "import/core-modules": ["https://da.live/nx/utils/sdk.js"]
+  }
+}

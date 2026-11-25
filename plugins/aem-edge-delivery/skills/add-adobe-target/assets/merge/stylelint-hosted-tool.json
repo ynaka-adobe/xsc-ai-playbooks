@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": ["tools/target/target.css"],
+      "rules": {
+        "selector-class-pattern": "^[a-z][a-z0-9]*(-{1,2}[a-z0-9]+)*$"
+      }
+    }
+  ]
+}
