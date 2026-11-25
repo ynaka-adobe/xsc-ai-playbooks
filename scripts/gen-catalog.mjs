@@ -41,7 +41,8 @@ const PRODUCT_META = {
 const SKILL_ORDER = {
   'aem-edge-delivery': [
     'eds-readiness', 'create-base-template', 'create-eds-repo',
-    'modernize-with-aemcoder', 'add-adobe-target', 'add-personal-okta', 'sync-da-content',
+    'modernize-with-aemcoder', 'add-adobe-target', 'add-personal-okta',
+    'add-experimentation-audiences', 'sync-da-content',
     'merge-back-to-base-template',
   ],
 };

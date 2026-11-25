@@ -46,6 +46,10 @@ Given product = Edge Delivery, route by what they want to do:
 - **Add an integration (Target, …)?** → Path B: **`add-adobe-target`**.
 - **Add personal Okta sign-in or a header profile flyout?** → **`add-personal-okta`** in the
   **`aem-edge-delivery`** toolset (for custom `*.ynaka-adobe.com` EDS domains).
+- **Personalize sections by region or signed-in group?** → **`add-experimentation-audiences`**
+  (CDN geo for region; working Okta authentication for groups).
+- **Add per-user storage (favorites, My List, preferences)?** → **`create-stash`**.
+- **Restrict pages by group/country (ABAC / closed user groups, lock icons)?** → **`add-abac-cug`**.
 - **Fold a finished integration into the base template?** → **`merge-back-to-base-template`**.
 
 Confirm the pick in one sentence ("Sounds like a **manufacturing Edge Delivery** demo, first one on this machine —
