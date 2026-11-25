@@ -44,6 +44,8 @@ Given product = Edge Delivery, route by what they want to do:
   fork to Path A or Path B).
 - **Migrate a real customer site?** → Path A: **`modernize-with-aemcoder`**.
 - **Add an integration (Target, …)?** → Path B: **`add-adobe-target`**.
+- **Add personal Okta sign-in or a header profile flyout?** → **`add-personal-okta`** in the
+  **`aem-edge-delivery`** toolset (for custom `*.ynaka-adobe.com` EDS domains).
 - **Fold a finished integration into the base template?** → **`merge-back-to-base-template`**.
 
 Confirm the pick in one sentence ("Sounds like a **manufacturing Edge Delivery** demo, first one on this machine —

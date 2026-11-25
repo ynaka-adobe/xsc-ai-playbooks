@@ -26,7 +26,7 @@ xsc-ai-playbooks/                        ← this repo = the marketplace (ynaka-
 │   │   └── skills/ (create-demo, update-plugin)
 │   └── aem-edge-delivery/               ← Layer 2: the EDS demo toolset
 │       ├── skills/ (eds-readiness, create-base-template, create-eds-repo,
-│       │            modernize-with-aemcoder, add-adobe-target, sync-da-content,
+│       │            modernize-with-aemcoder, add-adobe-target, add-personal-okta, sync-da-content,
 │       │            merge-back-to-base-template)
 │       └── verticals.json               ← vertical → base-template registry
 ├── scripts/gen-catalog.mjs             ← generates /docs from the skills
