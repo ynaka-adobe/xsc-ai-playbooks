@@ -45,6 +45,7 @@ Given product = Edge Delivery, route by what they want to do:
 - **Migrate a real customer site?** → Path A: **`modernize-with-aemcoder`**.
 - **Add an integration (Target, …)?** → Path B: **`add-adobe-target`**.
 - **Add per-user storage (favorites, My List, preferences)?** → **`create-stash`**.
+- **Restrict pages by group/country (ABAC / closed user groups, lock icons)?** → **`add-abac-cug`**.
 - **Fold a finished integration into the base template?** → **`merge-back-to-base-template`**.
 
 Confirm the pick in one sentence ("Sounds like a **manufacturing Edge Delivery** demo, first one on this machine —
